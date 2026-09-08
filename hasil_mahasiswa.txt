@@ -1,0 +1,7 @@
+KARTU HASIL STUDI MAHASISWA
+Nama : Fatah
+NIM : 2311104067
+Program Studi : Teknik Sipil
+Rata-rata : 80.98
+Grade : B
+Status : LULUS

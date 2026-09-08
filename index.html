@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penilaian Mahasiswa</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div>
+            <span class="badge">🎓 SISTEM AKADEMIK</span>
+            <h1>Sistem Penilaian<br><span>Mahasiswa</span></h1>
+            <p>Kelola nilai, evaluasi akademik, dan pantau pencapaian mahasiswa.</p>
+        </div>
+
+        <div class="header-icon">
+            🎓
+        </div>
+    </header>
+
+
+    <!-- FORM IDENTITAS -->
+    <section class="card">
+        <div class="section-title">
+            <div class="icon">👤</div>
+            <div>
+                <h2>Identitas Mahasiswa</h2>
+                <p>Masukkan informasi mahasiswa</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="input-group">
+                <label>Nama Mahasiswa</label>
+                <input type="text" id="nama" placeholder="Masukkan nama">
+            </div>
+
+
+            <div class="input-group">
+                <label>Nama Universitas</label>
+                <input type="text"  id="universitas" value="Telkom University Purwokerto"placeholder="Masukkan nama universitas">
+            </div>
+        
+
+            <div class="input-group">
+                <label>NIM</label>
+                <input type="text" id="nim" placeholder="Masukkan NIM">
+            </div>
+
+            <div class="input-group">
+                <label>Program Studi</label>
+                <input type="text" id="prodi" placeholder="Contoh: Rekayasa Perangkat Lunak">
+            </div>
+
+            <div class="input-group">
+                <label>Kelas</label>
+                <input type="text" id="kelas" placeholder="Contoh: SE-05">
+            </div>
+
+            <div class="input-group">
+                <label>Semester</label>
+                <input type="number" id="semester" min="1" max="14" placeholder="Semester">
+            </div>
+
+            <div class="input-group">
+                <label>Angkatan</label>
+                <input type="number" id="angkatan" placeholder="Contoh: 2023">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="email@contoh.com">
+            </div>
+
+            <div class="input-group">
+                <label>Target IPK</label>
+                <input type="number" id="targetIpk" min="0" max="4" step="0.01" placeholder="Contoh: 3.50">
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MATA KULIAH -->
+    <section class="card">
+
+        <div class="section-title">
+            <div class="icon">📚</div>
+            <div>
+                <h2>Daftar Mata Kuliah</h2>
+                <p>Masukkan nilai setiap mata kuliah</p>
+            </div>
+        </div>
+
+        <div id="mataKuliahContainer">
+
+            <div class="mk-card">
+
+                <div class="mk-header">
+                    <h3>Mata Kuliah #1</h3>
+                    <button type="button" class="remove-btn" onclick="hapusMK(this)">
+                        ×
+                    </button>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group full">
+                        <label>Nama Mata Kuliah</label>
+                        <input type="text" class="nama-mk" placeholder="Contoh: Pemrograman Web">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Nilai Tugas</label>
+                        <input type="number" class="tugas" min="0" max="100" placeholder="0 - 100">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Nilai UTS</label>
+                        <input type="number" class="uts" min="0" max="100" placeholder="0 - 100">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Nilai UAS</label>
+                        <input type="number" class="uas" min="0" max="100" placeholder="0 - 100">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Kehadiran (%)</label>
+                        <input type="number" class="kehadiran" min="0" max="100" placeholder="0 - 100">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <button class="add-btn" onclick="tambahMK()">
+            ＋ Tambah Mata Kuliah
+        </button>
+
+        <button class="calculate-btn" onclick="hitungNilai()">
+            📊 Hitung Hasil Penilaian
+        </button>
+
+    </section>
+
+
+    <!-- HASIL -->
+    <section id="hasil" class="result-section hidden">
+
+        <!-- PROFILE -->
+        <div class="result-card profile-card">
+
+            <div class="profile-header">
+                <div class="avatar" id="avatar">M</div>
+
+                <div>
+                    <h2 id="hasilNama">Nama Mahasiswa</h2>
+                    <p id="hasilNim">NIM</p>
+                </div>
+
+                <div class="status" id="status">
+                    LULUS
+                </div>
+            </div>
+
+            <div class="profile-info">
+
+                <div>
+                    <span>Universitas</span>
+                    <strong id="hasilUniversitas">-</strong>
+                </div>
+
+                <div>
+                    <span>Program Studi</span>
+                    <strong id="hasilProdi">-</strong>
+                </div>
+
+                <div>
+                    <span>Kelas</span>
+                    <strong id="hasilKelas">-</strong>
+                </div>
+
+                <div>
+                    <span>Semester</span>
+                    <strong id="hasilSemester">-</strong>
+                </div>
+
+                <div>
+                    <span>Angkatan</span>
+                    <strong id="hasilAngkatan">-</strong>
+                </div>
+
+                <div>
+                    <span>Email</span>
+                    <strong id="hasilEmail">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SCORE -->
+        <div class="score-grid">
+
+            <div class="score-card primary">
+                <span>Rata-rata Nilai</span>
+                <strong id="rataRata">0.00</strong>
+                <small>/ 100</small>
+            </div>
+
+            <div class="score-card">
+                <span>Grade</span>
+                <strong id="grade">-</strong>
+                <small id="emoji">😊</small>
+            </div>
+
+            <div class="score-card">
+                <span>Mutu</span>
+                <strong id="mutu">0.0</strong>
+                <small>IPK</small>
+            </div>
+
+            <div class="score-card">
+                <span>Predikat</span>
+                <strong id="predikat">-</strong>
+            </div>
+
+        </div>
+
+
+        <!-- NILAI MATA KULIAH -->
+        <div class="result-card">
+
+            <div class="section-title">
+                <div class="icon">📋</div>
+
+                <div>
+                    <h2>Hasil Mata Kuliah</h2>
+                    <p>Rincian nilai akhir</p>
+                </div>
+            </div>
+
+            <div id="tabelNilai"></div>
+
+        </div>
+
+
+        <!-- ANALISIS -->
+        <div class="analysis-grid">
+
+            <div class="result-card analysis-card">
+                <div class="analysis-icon">🏆</div>
+                <span>Mata Kuliah Terbaik</span>
+                <strong id="terbaik">-</strong>
+            </div>
+
+            <div class="result-card analysis-card">
+                <div class="analysis-icon">📉</div>
+                <span>Mata Kuliah Terendah</span>
+                <strong id="terburuk">-</strong>
+            </div>
+
+            <div class="result-card analysis-card">
+                <div class="analysis-icon">🎓</div>
+                <span>Prediksi Kelulusan</span>
+                <strong id="prediksi">-</strong>
+            </div>
+
+            <div class="result-card analysis-card">
+                <div class="analysis-icon">💰</div>
+                <span>Status Beasiswa</span>
+                <strong id="beasiswa">-</strong>
+            </div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+        <div class="result-card">
+
+            <div class="progress-header">
+                <div>
+                    <span>📈 Progress Nilai</span>
+                    <h2>Performa Akademik</h2>
+                </div>
+
+                <strong id="progressValue">0%</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+
+            <p class="academic-status" id="analisisAkademik">
+                -
+            </p>
+
+        </div>
+
+
+        <!-- ACHIEVEMENT -->
+        <div class="achievement-card">
+
+            <div class="achievement-icon">
+                🏅
+            </div>
+
+            <div>
+                <span>ACHIEVEMENT</span>
+                <h2 id="achievement">Pejuang Nilai</h2>
+                <p id="motivasi">
+                    Terus tingkatkan prestasimu!
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- TARGET -->
+        <div class="target-card">
+
+            <div class="target-icon">🎯</div>
+
+            <div>
+                <span>Evaluasi Target IPK</span>
+                <h2 id="targetTitle">Target belum dievaluasi</h2>
+                <p id="targetText">-</p>
+            </div>
+
+        </div>
+
+
+        <!-- GELAR -->
+        <div class="gelar-card">
+            <span>🎖️ Gelar Mahasiswa</span>
+            <h2 id="gelar">Master Algoritma</h2>
+        </div>
+
+
+        <button class="download-btn" onclick="simpanHasil()">
+            💾 Simpan Hasil
+        </button>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
